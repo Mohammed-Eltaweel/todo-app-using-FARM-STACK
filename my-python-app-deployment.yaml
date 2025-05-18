@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-python-app-deployment
+  labels:
+    app: my-python-app
+    type: frontend
+
+spec:
+  selector:
+    matchLabels:
+      type: frontend
+  template:
+    metadata:
+      name: my-python-pod
+      labels:
+        app: my-python-app
+        type: frontend
+
+    spec:
+      containers:
+        - name: python-api
+          image: my-python-app-2
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8000
+
+  replicas: 2
+
